@@ -28,6 +28,8 @@ function getComputerChoice() {
 //create prompt for user to enter one of the values
 //return the choice or error to the user
 
+//**need to make case insensitve
+
 const userInput = prompt("choose: rock, paper, or scissors");
 
 function getHumanChoice() {
@@ -45,3 +47,24 @@ function getHumanChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+
+//SINGLE ROUND
+
+//logic
+//rock beats scissors
+//paper beats rock
+//scissors beats paper
+//scissors/scissors (try again/no score)
+//rock/rock (try again/no score)
+//paper/paper (try again/no score)
+
+//**need to make case insensitive
+
+function playRound(humanChoice, computerChoice) {
+    switch
+};
+  
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+  
+playRound(humanSelection, computerSelection);
