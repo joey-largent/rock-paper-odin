@@ -9,7 +9,7 @@ function getRandomNum(min, max) {
 
 //then we need to make a conditional statement to link the numbers with strings for R, P, and S
 //we also need to link the two functions using "number"
-function getComputerChoice () {
+function getComputerChoice() {
     let number = getRandomNum();
     if (number === 1) {
         return "rock";
@@ -25,4 +25,15 @@ function getComputerChoice () {
 
 //HUMAN CHOICE
 
-//
+const userInput = prompt("choose: rock, paper, or scissors");
+
+function getHumanChoice() {
+    if (userInput === "rock") {
+        return "you chose ROCK";
+    } else if (userInput === "paper") {
+        return "you chose PAPER";
+    } else if (userInput === "scissors") {
+        return "you chose SCISSORS";
+    } else (userInput !== null)
+        return "ERROR - check spelling.";
+};
