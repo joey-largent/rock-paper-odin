@@ -31,7 +31,7 @@ function getComputerChoice() {
 //uncomment below to allow prompt for a real human
 let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
 
-//for test, human-simulated variables
+//for auto test, human-simulated variables
 //const testInputs = ["rock", "rock", "scissors", "paper", "scissors"];
 //let testCount = 0;
 //let userInput = testInputs[testCount];
@@ -71,7 +71,7 @@ function playGame () {
             //uncomment below when using a real human
             userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
 
-            //test ONLY inputs to simulate the human (comment out if not testing)
+            //for autotest ONLY, inputs to simulate the human (comment out if not testing)
             //userInput = testInputs[testCount++];
 
             if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
