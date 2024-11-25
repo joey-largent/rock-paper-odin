@@ -28,19 +28,19 @@ function getComputerChoice() {
 //create prompt for user to enter one of the values
 //return the choice or error to the user
 
-//**need to make case insensitve
-
-const userInput = prompt("choose: rock, paper, or scissors");
+//let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
+//to test:
+let userInput = "rock";
 
 function getHumanChoice() {
     if (userInput === "rock") {
-        return "you chose ROCK";
+        return "rock";
     } else if (userInput === "paper") {
-        return "you chose PAPER";
+        return "paper";
     } else if (userInput === "scissors") {
-        return "you chose SCISSORS";
+        return "scissors";
     } else (userInput !== null)
-        return "ERROR - check spelling / missing input";
+        return "ERROR";
 };
 
 //SCORE VARIABLES
@@ -50,21 +50,43 @@ let computerScore = 0;
 
 //SINGLE ROUND
 
-//logic
-//rock beats scissors
-//paper beats rock
-//scissors beats paper
-//scissors/scissors (try again/no score)
-//rock/rock (try again/no score)
-//paper/paper (try again/no score)
 
-//**need to make case insensitive
+const humanChoice = getHumanChoice();
+const computerChoice = getComputerChoice();
+
 
 function playRound(humanChoice, computerChoice) {
-    switch
+    //rock & paper
+    if (humanChoice === "rock" && computerChoice === "paper") {
+        return computerScore++;
+        console.log("You lose! Paper beats rock");
+    } else if (humanChoice === "paper" && computerChoice === "rock") {
+        return humanScore++;
+        console.log("You win! Paper beats rock");
+    //scissors & paper
+    } else if (humanChoice === "paper" && computerChoice === "scissors") {
+        return computerScore++;
+        console.log("You lose! Scissors beats paper");
+    } else if (humanChoice === "scissors" && computerChoice === "paper") {
+        return humanScore++;
+        console.log("You win! Scissors beats paper");
+    //rock & scissors
+    } else if (humanChoice === "scissors" && computerChoice === "rock") {
+        return computerScore++;
+        console.log("You lose! Rock beats scissors");
+    } else if (humanChoice === "rocks" && computerChoice === "scissors") {
+        return humanScore++;
+        console.log("You win! Rock beats scissors");
+    //scissors & scissors
+    } else if (humanChoice === "scissors" && computerChoice === "scissors") {
+        return console.log("Tie! Try again.");
+    //rock & rock
+    } else if (humanChoice === "rock" && computerChoice === "rock") {
+        return console.log("Tie! Try again.");
+    } else if (humanChoice === "paper" && computerChoice === "paper") {
+        return console.log("Tie! Try again.");
+    } else (userInput !== null)
+        return "ERROR - missing input";
 };
-  
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-  
-playRound(humanSelection, computerSelection);
+
+console.log(playRound(humanChoice, computerChoice));
