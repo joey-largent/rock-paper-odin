@@ -65,15 +65,17 @@ function playGame () {
     //plays 5 rounds of game, reprompts user after each round, check for valid response and then exits loop when valid
 
     for (let round = 1; round <= 5; round++) {
+        //ensures user input matches the input of all possible human inputs
         let validInput = false;
         while (!validInput) {
-            //line below allows prompt for user
+            //line below allows prompt for user at the beginning of each round
             //uncomment below when using a real human
             userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
 
             //for autotest ONLY, inputs to simulate the human (comment out if not testing)
             //userInput = testInputs[testCount++];
 
+            //tests user input for validity
             if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
                 validInput = true;
             } else {
