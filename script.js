@@ -29,12 +29,12 @@ function getComputerChoice() {
 //return the choice or error to the system
 
 //uncomment below to allow prompt for a real human
-//let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
+let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
 
 //for test, human-simulated variables
-const testInputs = ["rock", "rock", "scissors", "paper", "scissors"];
-let testCount = 0;
-let userInput = testInputs[testCount];
+//const testInputs = ["rock", "rock", "scissors", "paper", "scissors"];
+//let testCount = 0;
+//let userInput = testInputs[testCount];
 
 function getHumanChoice() {
     if (userInput === "rock") {
@@ -68,10 +68,11 @@ function playGame () {
         let validInput = false;
         while (!validInput) {
             //line below allows prompt for user
-            //userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
+            //uncomment below when using a real human
+            userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
 
-            //test ONLY inputs to simulate the human
-            userInput = testInputs[testCount++];
+            //test ONLY inputs to simulate the human (comment out if not testing)
+            //userInput = testInputs[testCount++];
 
             if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
                 validInput = true;
