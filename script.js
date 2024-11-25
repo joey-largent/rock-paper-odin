@@ -28,9 +28,9 @@ function getComputerChoice() {
 //creates prompt for user to enter one of the values
 //return the choice or error to the system
 
-//let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
+let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
 //to test:
-let userInput = "paper";
+//let userInput = "paper";
 
 function getHumanChoice() {
     if (userInput === "rock") {
@@ -48,46 +48,6 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-//SINGLE ROUND
-
-//makes the functions above variables
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-
-
-function playRound(humanChoice, computerChoice) {
-    //rock & paper
-    if (humanChoice === "rock" && computerChoice === "paper") {
-        computerScore++;
-        return "You lose! Paper beats rock";
-    } else if (humanChoice === "paper" && computerChoice === "rock") {
-        humanScore++;
-        return "You win! Paper beats rock";
-    //scissors & paper
-    } else if (humanChoice === "paper" && computerChoice === "scissors") {
-        computerScore++;
-        return "You lose! Scissors beats paper";
-    } else if (humanChoice === "scissors" && computerChoice === "paper") {
-        humanScore++;
-        return "You win! Scissors beats paper";
-    //rock & scissors
-    } else if (humanChoice === "scissors" && computerChoice === "rock") {
-        computerScore++;
-        return "You lose! Rock beats scissors";
-    } else if (humanChoice === "rock" && computerChoice === "scissors") {
-        humanScore++;
-        return "You win! Rock beats scissors";
-    //same input or error
-    } else if (humanChoice === computerChoice) {
-        return "Tie! Try again.";
-    } else (userInput !== null)
-        return "ERROR - invalid input";
-};
-
-//collects choices and prints them to the console
-const result = playRound(humanChoice, computerChoice);
-console.log(result)
-
 //PLAY GAME
 
 //plays "playround" 5 times
@@ -98,7 +58,71 @@ console.log(result)
 //after five rounds, the game declares the winner, and resets
 
 function playGame () {
-    for (let rounds = 0; rounds < 5; rounds++) {
-    
+    //plays 5 rounds of game, reprompts user after each round, check for valid response and then exits loop when valid
+
+
+    for (let round = 1; round <= 5; round++) {
+        let validInput = false;
+        while (!validInput) {
+            userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
+
+            if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
+                validInput = true;
+            } else {
+                console.log("Invalid input! Please choose rock, paper, or scissors");
+            }
+        }
+    };
+
+    //makes the functions above variables
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+
+    //collects choices and prints them to the console
+    const result = playRound(humanChoice, computerChoice);
+    console.log(`Round ${round} result: ${result}`);
+    console.log(`Scores: Human ${humanScore}, Computer ${computerScore}`);
+
+    //checks score for who wins after 5 rounds
+    if (humanScore > computerScore) {
+        console.log("You win! You beat the computer!");
+    } else if (humanScore < computerScore) {
+        console.log("You lose! Dumb human, ahahahaha!");
+    } else if (humanScore === computerScore)
+        console.log("Oha! Is that a tie that just occured??");
+
+    //reset scores
+    humanScore = 0;
+    computerScore = 0;
+
+    //runs a single round, using RPS logic
+    function playRound(humanChoice, computerChoice) {
+        //rock & paper
+        if (humanChoice === "rock" && computerChoice === "paper") {
+            computerScore++;
+            return "You lose! Paper beats rock";
+        } else if (humanChoice === "paper" && computerChoice === "rock") {
+            humanScore++;
+            return "You win! Paper beats rock";
+        //scissors & paper
+        } else if (humanChoice === "paper" && computerChoice === "scissors") {
+            computerScore++;
+            return "You lose! Scissors beats paper";
+        } else if (humanChoice === "scissors" && computerChoice === "paper") {
+            humanScore++;
+            return "You win! Scissors beats paper";
+        //rock & scissors
+        } else if (humanChoice === "scissors" && computerChoice === "rock") {
+            computerScore++;
+            return "You lose! Rock beats scissors";
+        } else if (humanChoice === "rock" && computerChoice === "scissors") {
+            humanScore++;
+            return "You win! Rock beats scissors";
+        //same input or error
+        } else if (humanChoice === computerChoice) {
+            return "Tie! Try again.";
+        } else (userInput !== null)
+            return "ERROR - invalid input";
     }
-}
+};
+
