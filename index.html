@@ -3,10 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Rock, Paper, Odin!</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+
+    <style>
+        html {
+            font-family: 'Open Sans';
+        }
+
+        body {
+            background-color: cadetblue;
+        }
+
+        .btnDiv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .rock-btn {
+            color: #8a3535;
+            background-color: #DD9787;
+        }
+
+        .paper-btn {
+            color: #cfc99a;
+            background-color: #fcfff0
+        }
+
+        .scissors-btn {
+            color: #333333;
+            background: linear-gradient(135deg, 
+            #E0E0E0, /* Light silver */
+            #C0C0C0, /* Medium silver */
+            #A8A8A8, /* Darker silver */
+            #F5F5F5  /* Bright silver/white for shine */
+            );
+        }
+
+        button {
+            font-weight: 700;
+            font-size: 3.5rem;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 5px 5px 5px #0C7580;
+            padding: 0.5rem;
+            margin: 0.5rem;
+            max-width: 50%;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .rock-btn:hover {
+            background: linear-gradient(135deg, 
+            #d25216,
+            #8A4A3C, 
+            #ca3b13 
+            );
+            cursor: pointer;
+        }
+
+        .paper-btn:hover {
+            background: linear-gradient(135deg, 
+            #deb887,
+            #a28c7d,
+            #e2ccb8
+            );
+            cursor: pointer;
+        }
+
+        .scissors-btn:hover {
+            background: linear-gradient(135deg, 
+            #F5F5F5,
+            #5a5a5a,
+            #6a6969 
+            );
+            cursor: pointer;
+        }
+
+        button:active {
+            box-shadow: 0 5px #044148;
+            transform: translateY(10px);
+        }
+
+        .points-head {
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .textDiv {
+            display: flex;
+            flex-direction: row;
+        }
+
+    </style>
+
 </head>
 <body>
-    
+    <div class="btnDiv"></div>
+    <div class="textDiv"></div>
 </body>
 </html>

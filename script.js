@@ -1,3 +1,41 @@
+//Note: would like to have a button that translates all game UI to Turkish
+
+// UI
+const btnDiv = document.querySelector(".btnDiv");
+const body = document.querySelector("body");
+
+const scoreHead = document.createElement("h1");
+scoreHead.textContent = "SCORE";
+body.appendChild(scoreHead);
+
+const rock = document.createElement("button");
+rock.textContent = "ROCK";
+rock.classList.add("rock-btn");
+btnDiv.appendChild(rock);
+
+const paper = document.createElement("button");
+paper.textContent = "PAPER";
+paper.classList.add("paper-btn");
+btnDiv.appendChild(paper);
+
+const scissors = document.createElement("button");
+scissors.textContent = "SCISSORS";
+scissors.classList.add("scissors-btn");
+btnDiv.appendChild(scissors);
+
+const humanPointsHead = document.createElement("p");
+humanPointsHead.textContent = "HUMAN";
+humanPointsHead.classList.add("points-head");
+
+const compPointsHead = document.createElement("p");
+compPointsHead.textContent = "COMPUTER";
+compPointsHead.classList.add("points-head");
+
+const textDiv = document.querySelector(".textDiv");
+textDiv.appendChild(humanPointsHead);
+textDiv.appendChild(compPointsHead);
+
+
 //COMPUTER CHOICE
 
 //generates a random number between 1-3
@@ -29,7 +67,7 @@ function getComputerChoice() {
 //return the choice or error to the system
 
 //uncomment below to allow prompt for a real human
-let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
+//let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
 
 //for auto test, human-simulated variables
 //const testInputs = ["rock", "rock", "scissors", "paper", "scissors"];
@@ -69,7 +107,7 @@ function playGame () {
         let validInput = false;
         while (!validInput) {
             //line below allows prompt for user at the beginning of each round
-            //uncomment below when using a real human
+            //comment out when using autotest
             userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
 
             //for autotest ONLY, inputs to simulate the human (comment out if not testing)
@@ -96,11 +134,11 @@ function playGame () {
 
     //checks score for who wins after 5 rounds
     if (humanScore > computerScore) {
-        console.log("You win! You beat the computer!");
+        console.log("You win the game!! You beat the computer!");
     } else if (humanScore < computerScore) {
-        console.log("You lose! Dumb human, ahahahaha!");
+        console.log("You lose!! The computer beat you :)");
     } else if (humanScore === computerScore)
-        console.log("Oha! Is that a tie that just occured??");
+        console.log("It's a tie!! Play again?");
 };
 
 //reset scores
@@ -137,4 +175,5 @@ function playRound(humanChoice, computerChoice) {
         return "ERROR - invalid input";
 };
 
-playGame();
+
+//console.log(playGame());
