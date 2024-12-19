@@ -1,12 +1,17 @@
 //Note: would like to have a button that translates all game UI to Turkish
+//need to store human previous choice after clicking (rock remains highlighted)
+//Would also like to have pop sound effects when you push the buttons
 
 // UI
 const btnDiv = document.querySelector(".btnDiv");
 const body = document.querySelector("body");
 
-const scoreHead = document.createElement("h1");
-scoreHead.textContent = "SCORE";
-body.appendChild(scoreHead);
+const roundHead = document.createElement("h1");
+const roundAnnounce = document.createElement("p");
+roundHead.textContent = "ROUND: ${round} of 5";
+roundHead.classList.add("round-head");
+roundAnnounce.textContent = "";
+body.prepend(roundHead);
 
 const rock = document.createElement("button");
 rock.textContent = "ROCK";
@@ -23,17 +28,33 @@ scissors.textContent = "SCISSORS";
 scissors.classList.add("scissors-btn");
 btnDiv.appendChild(scissors);
 
-const humanPointsHead = document.createElement("p");
+
+const humanDiv = document.createElement("div");
+const humanPointsHead = document.createElement("h1");
 humanPointsHead.textContent = "HUMAN";
-humanPointsHead.classList.add("points-head");
+humanPointsHead.classList.add("hum-head");
 
-const compPointsHead = document.createElement("p");
+const compChoiceDiv = document.createElement("div");
+const compChoiceAnnounce = document.createElement("h1")
+const compChoice = document.createElement("button");
+compChoiceAnnounce.textContent = "COMPUTER CHOSE:";
+compChoiceAnnounce.classList.add("comp-choice-announce");
+compChoice.classList.add("comp-choice");
+compChoice.textContent = "Rock";
+body.appendChild(compChoiceDiv);
+compChoiceDiv.appendChild(compChoiceAnnounce);
+compChoiceDiv.appendChild(compChoice);
+
+
+const compDiv = document.createElement("div");
+const compPointsHead = document.createElement("h1");
 compPointsHead.textContent = "COMPUTER";
-compPointsHead.classList.add("points-head");
+compPointsHead.classList.add("comp-head");
 
-const textDiv = document.querySelector(".textDiv");
-textDiv.appendChild(humanPointsHead);
-textDiv.appendChild(compPointsHead);
+body.appendChild(humanDiv);
+body.appendChild(compDiv);
+humanDiv.appendChild(humanPointsHead);
+compDiv.appendChild(compPointsHead);
 
 
 //COMPUTER CHOICE
