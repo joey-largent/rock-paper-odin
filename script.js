@@ -132,7 +132,7 @@ function showGameOver() {
     }
     
     const playAgainButton = document.createElement('button');
-    playAgainButton.textContent = "Try again?";
+    playAgainButton.textContent = "TRY AGAIN?";
     playAgainButton.classList.add('play-again');
     
     gameOverDiv.appendChild(winnerText);
