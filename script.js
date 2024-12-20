@@ -8,7 +8,7 @@ const body = document.querySelector("body");
 
 const roundHead = document.createElement("h1");
 const roundAnnounce = document.createElement("p");
-roundHead.textContent = "ROUND: ${round} of 5";
+roundHead.textContent = "ROUND: 1 of 5";
 roundHead.classList.add("round-head");
 roundAnnounce.textContent = "";
 body.prepend(roundHead);
@@ -31,16 +31,16 @@ btnDiv.appendChild(scissors);
 
 const humanDiv = document.createElement("div");
 const humanPointsHead = document.createElement("h1");
-humanPointsHead.textContent = "HUMAN";
+humanPointsHead.textContent = "HUMAN: 0";
 humanPointsHead.classList.add("hum-head");
 
 const compChoiceDiv = document.createElement("div");
 const compChoiceAnnounce = document.createElement("h1")
-const compChoice = document.createElement("button");
+const compChoice = document.createElement("p");
 compChoiceAnnounce.textContent = "COMPUTER CHOSE:";
 compChoiceAnnounce.classList.add("comp-choice-announce");
 compChoice.classList.add("comp-choice");
-compChoice.textContent = "Rock";
+compChoice.textContent = "Waiting...";
 body.appendChild(compChoiceDiv);
 compChoiceDiv.appendChild(compChoiceAnnounce);
 compChoiceDiv.appendChild(compChoice);
@@ -48,13 +48,40 @@ compChoiceDiv.appendChild(compChoice);
 
 const compDiv = document.createElement("div");
 const compPointsHead = document.createElement("h1");
-compPointsHead.textContent = "COMPUTER";
+compPointsHead.textContent = "COMPUTER: 0";
 compPointsHead.classList.add("comp-head");
 
 body.appendChild(humanDiv);
 body.appendChild(compDiv);
 humanDiv.appendChild(humanPointsHead);
 compDiv.appendChild(compPointsHead);
+
+//GAME VARIABLES
+let round = 1;
+let humanScore = 0;
+let computerScore = 0;
+
+function updateRoundDisplay() {
+    roundHead.textContent = `ROUND: ${round} of 5`;
+}
+
+function updateScores() {
+    humanPointsHead.textContent = `HUMAN: ${humanScore}`;
+    compPointsHead.textContent = `COMPUTER: ${computerScore}`;
+}
+
+function showRoundResult(result) {
+    const roundResult = document.querySelector('.round-result');
+    if (!roundResult) {
+        const newResult = document.createElement('p');
+        newResult.classList.add('round-result');
+        newResult.textContent = result;
+        body.appendChild(newResult);
+    } else {
+        roundResult.textContent = result;
+    }
+}
+
 
 
 //COMPUTER CHOICE
@@ -105,11 +132,6 @@ function getHumanChoice() {
     } else (userInput !== null)
         return "ERROR";
 };
-
-//SCORE VARIABLES
-
-let humanScore = 0;
-let computerScore = 0;
 
 //PLAY GAME
 
