@@ -2,7 +2,7 @@
 //need to store human previous choice after clicking (rock remains highlighted)
 //Would also like to have pop sound effects when you push the buttons
 
-// UI
+// HTML ELEMENTS
 const btnDiv = document.querySelector(".btnDiv");
 const body = document.querySelector("body");
 
@@ -56,7 +56,7 @@ body.appendChild(compDiv);
 humanDiv.appendChild(humanPointsHead);
 compDiv.appendChild(compPointsHead);
 
-//GAME VARIABLES
+//GAME UI
 let round = 1;
 let humanScore = 0;
 let computerScore = 0;
@@ -82,19 +82,86 @@ function showRoundResult(result) {
     }
 }
 
+btnDiv.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('rock-btn')) {
+        handleHumanChoice('rock');
+    } else if (target.classList.contains('paper-btn')) {
+        handleHumanChoice('paper');
+    } else if (target.classList.contains('scissors-btn')) {
+        handleHumanChoice('scissors');
+    }
+});
+
+function handleHumanChoice(humanChoice) {
+    const computerChoice = getComputerChoice();
+    const result = playRound(humanChoice, computerChoice);
+
+    compChoice.textContent = computerChoice.toUpperCase();
+    showRoundResult(result);
+    updateScores();
+
+    if (round === 5) {
+        showGameOver();
+    } else {
+        round++;
+        updateRoundDisplay();
+    }
+}
+
+function showGameOver() {
+    btnDiv.style.display = 'none';
+    roundHead.style.display = 'none';
+    humanDiv.style.display = 'none';
+    compDiv.style.display = 'none';
+    compChoiceDiv.style.display = 'none';
+
+    const gameOverDiv = document.createElement('div');
+    gameOverDiv.style.textAlign = 'center';
+    gameOverDiv.style.marginTop = '50px';
+    gameOverDiv.style.color = '#f1e1ae';
+
+    const winnerText = humanScore > computerScore
+        ? "Congratulations, You Win!"
+        : humanScore < computerScore
+        ? "Sorry, Computer Wins!"
+        : "It's a Tie!";
+    gameOverDiv.innerHTML = `
+        <h1>${winnerText}</h1>
+        <button id="play-again" style="font-size: 2rem; margin-top: 20px;">Play Again</button>
+    `;
+    body.appendChild(gameOverDiv);
+
+    document.getElementById('play-again').addEventListener('click', resetGame);
+}
+
+function resetGame() {
+    round = 1;
+    humanScore = 0;
+    computerScore = 0;
+
+    updateRoundDisplay();
+    updateScores();
+    btnDiv.style.display = 'flex';
+    roundHead.style.display = 'block';
+    humanDiv.style.display = 'block';
+    compDiv.style.display = 'block';
+    compChoiceDiv.style.display = 'block';
+
+    const gameOverDiv = document.querySelector('div:last-child');
+    gameOverDiv.remove();
+}
 
 
 //COMPUTER CHOICE
 
-//generates a random number between 1-3
 function getRandomNum(min, max) {
     min = Math.ceil(1);
     max = Math.floor(3);
     return number = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
 };
 
-//links the numbers with strings for R, P, and S
-//links the two functions using "number"
+
 function getComputerChoice() {
     let number = getRandomNum();
     if (number === 1) {
@@ -108,87 +175,8 @@ function getComputerChoice() {
     }
 };
 
+//GAME
 
-//HUMAN CHOICE
-
-//creates prompt for user to enter one of the values
-//return the choice or error to the system
-
-//uncomment below to allow prompt for a real human
-//let userInput = prompt("choose: rock, paper, or scissors").toLowerCase;
-
-//for auto test, human-simulated variables
-//const testInputs = ["rock", "rock", "scissors", "paper", "scissors"];
-//let testCount = 0;
-//let userInput = testInputs[testCount];
-
-function getHumanChoice() {
-    if (userInput === "rock") {
-        return "rock";
-    } else if (userInput === "paper") {
-        return "paper";
-    } else if (userInput === "scissors") {
-        return "scissors";
-    } else (userInput !== null)
-        return "ERROR";
-};
-
-//PLAY GAME
-
-//plays "playround" 5 times
-//keeps track of scores
-//tests the highest score AFTER five rounds and declares a winner
-//after each round, prompts the human to input a new choice
-//after each round, declares who won the round AND their current score
-//after five rounds, the game declares the winner, and resets
-
-function playGame () {
-    //plays 5 rounds of game, reprompts user after each round, check for valid response and then exits loop when valid
-
-    for (let round = 1; round <= 5; round++) {
-        //ensures user input matches the input of all possible human inputs
-        let validInput = false;
-        while (!validInput) {
-            //line below allows prompt for user at the beginning of each round
-            //comment out when using autotest
-            userInput = prompt(`Round ${round}: choose rock, paper, or scissors!`).toLowerCase();
-
-            //for autotest ONLY, inputs to simulate the human (comment out if not testing)
-            //userInput = testInputs[testCount++];
-
-            //tests user input for validity
-            if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
-                validInput = true;
-            } else {
-                console.log("Invalid input! Please choose rock, paper, or scissors");
-            }
-        }
-
-        //makes the functions above variables
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-
-        //collects choices and prints them to the console
-        const result = playRound(humanChoice, computerChoice);
-        console.log(`Human: ${humanChoice}, Computer: ${computerChoice}`);
-        console.log(`Round ${round} result: ${result}`);
-        console.log(`Scores: Human ${humanScore}, Computer ${computerScore}`);
-    };
-
-    //checks score for who wins after 5 rounds
-    if (humanScore > computerScore) {
-        console.log("You win the game!! You beat the computer!");
-    } else if (humanScore < computerScore) {
-        console.log("You lose!! The computer beat you :)");
-    } else if (humanScore === computerScore)
-        console.log("It's a tie!! Play again?");
-};
-
-//reset scores
-humanScore = 0;
-computerScore = 0;
-
-//runs a single round, using RPS logic
 function playRound(humanChoice, computerChoice) {
     //rock & paper
     if (humanChoice === "rock" && computerChoice === "paper") {
@@ -217,6 +205,3 @@ function playRound(humanChoice, computerChoice) {
     } else (userInput !== null)
         return "ERROR - invalid input";
 };
-
-
-//console.log(playGame());
