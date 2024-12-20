@@ -1,5 +1,4 @@
 //Note: would like to have a button that translates all game UI to Turkish
-//need to store human previous choice after clicking (rock remains highlighted)
 //Would also like to have pop sound effects when you push the buttons
 
 // HTML ELEMENTS
@@ -28,16 +27,10 @@ scissors.textContent = "SCISSORS";
 scissors.classList.add("scissors-btn");
 btnDiv.appendChild(scissors);
 
-
-const humanDiv = document.createElement("div");
-const humanPointsHead = document.createElement("h1");
-humanPointsHead.textContent = "HUMAN: 0";
-humanPointsHead.classList.add("hum-head");
-
 const compChoiceDiv = document.createElement("div");
 const compChoiceAnnounce = document.createElement("h1")
 const compChoice = document.createElement("p");
-compChoiceAnnounce.textContent = "COMPUTER CHOSE:";
+compChoiceAnnounce.textContent = "COMPUTER:";
 compChoiceAnnounce.classList.add("comp-choice-announce");
 compChoice.classList.add("comp-choice");
 compChoice.textContent = "Waiting...";
@@ -45,14 +38,30 @@ body.appendChild(compChoiceDiv);
 compChoiceDiv.appendChild(compChoiceAnnounce);
 compChoiceDiv.appendChild(compChoice);
 
+const scoreContainer = document.createElement('div');
+scoreContainer.classList.add('human-computer-scores');
+body.appendChild(scoreContainer);
+
+const humanDiv = document.createElement("div");
+const humanPointsHead = document.createElement("h1");
+humanPointsHead.textContent = "HUMAN: 0";
+humanPointsHead.classList.add("hum-head");
 
 const compDiv = document.createElement("div");
 const compPointsHead = document.createElement("h1");
 compPointsHead.textContent = "COMPUTER: 0";
 compPointsHead.classList.add("comp-head");
 
-body.appendChild(humanDiv);
-body.appendChild(compDiv);
+humanDiv.appendChild(humanPointsHead);
+compDiv.appendChild(compPointsHead);
+
+scoreContainer.appendChild(humanDiv);
+scoreContainer.appendChild(compDiv);
+
+const roundResult = document.createElement("p");
+roundResult.classList.add("round-result");
+body.appendChild(roundResult);
+
 humanDiv.appendChild(humanPointsHead);
 compDiv.appendChild(compPointsHead);
 
@@ -71,15 +80,7 @@ function updateScores() {
 }
 
 function showRoundResult(result) {
-    const roundResult = document.querySelector('.round-result');
-    if (!roundResult) {
-        const newResult = document.createElement('p');
-        newResult.classList.add('round-result');
-        newResult.textContent = result;
-        body.appendChild(newResult);
-    } else {
-        roundResult.textContent = result;
-    }
+    roundResult.textContent = result;
 }
 
 btnDiv.addEventListener('click', (event) => {
@@ -115,24 +116,30 @@ function showGameOver() {
     humanDiv.style.display = 'none';
     compDiv.style.display = 'none';
     compChoiceDiv.style.display = 'none';
+    roundResult.style.display = "none";
 
     const gameOverDiv = document.createElement('div');
-    gameOverDiv.style.textAlign = 'center';
-    gameOverDiv.style.marginTop = '50px';
-    gameOverDiv.style.color = '#f1e1ae';
+    gameOverDiv.classList.add('game-over');
 
-    const winnerText = humanScore > computerScore
-        ? "Congratulations, You Win!"
-        : humanScore < computerScore
-        ? "Sorry, Computer Wins!"
-        : "It's a Tie!";
-    gameOverDiv.innerHTML = `
-        <h1>${winnerText}</h1>
-        <button id="play-again" style="font-size: 2rem; margin-top: 20px;">Play Again</button>
-    `;
+    const winnerText = document.createElement('h1');
+    winnerText.id = 'winner-text';
+    if (humanScore > computerScore) {
+        winnerText.textContent = "You beat the computer. Alas! There is HOPE for humanity.";
+    } else if (humanScore < computerScore) {
+        winnerText.textContent = "You lost to the computer. Mankind is DOOMED.";
+    } else {
+        winnerText.textContent = "It's a Tie. Show the world you can defeat our digital nemesis.";
+    }
+    
+    const playAgainButton = document.createElement('button');
+    playAgainButton.textContent = "Try again?";
+    playAgainButton.classList.add('play-again');
+    
+    gameOverDiv.appendChild(winnerText);
+    gameOverDiv.appendChild(playAgainButton);
     body.appendChild(gameOverDiv);
 
-    document.getElementById('play-again').addEventListener('click', resetGame);
+    document.querySelector('.play-again').addEventListener('click', resetGame);
 }
 
 function resetGame() {
@@ -147,8 +154,10 @@ function resetGame() {
     humanDiv.style.display = 'block';
     compDiv.style.display = 'block';
     compChoiceDiv.style.display = 'block';
+    roundResult.style.display = "block";
+    roundResult.textContent = "";
 
-    const gameOverDiv = document.querySelector('div:last-child');
+    const gameOverDiv = document.querySelector('.game-over');
     gameOverDiv.remove();
 }
 
@@ -178,28 +187,24 @@ function getComputerChoice() {
 //GAME
 
 function playRound(humanChoice, computerChoice) {
-    //rock & paper
     if (humanChoice === "rock" && computerChoice === "paper") {
         computerScore++;
-        return "You lose! Paper beats rock";
+        return "You lose! Paper beats rock.";
     } else if (humanChoice === "paper" && computerChoice === "rock") {
         humanScore++;
-        return "You win! Paper beats rock";
-    //scissors & paper
+        return "You win! Paper beats rock.";
     } else if (humanChoice === "paper" && computerChoice === "scissors") {
         computerScore++;
-        return "You lose! Scissors beats paper";
+        return "You lose! Scissors beats paper.";
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
         humanScore++;
-        return "You win! Scissors beats paper";
-    //rock & scissors
+        return "You win! Scissors beats paper.";
     } else if (humanChoice === "scissors" && computerChoice === "rock") {
         computerScore++;
-        return "You lose! Rock beats scissors";
+        return "You lose! Rock beats scissors.";
     } else if (humanChoice === "rock" && computerChoice === "scissors") {
         humanScore++;
-        return "You win! Rock beats scissors";
-    //same input or error
+        return "You win! Rock beats scissors.";
     } else if (humanChoice === computerChoice) {
         return "Tie! Try again.";
     } else (userInput !== null)
