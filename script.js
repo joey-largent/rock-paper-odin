@@ -38,6 +38,10 @@ body.appendChild(compChoiceDiv);
 compChoiceDiv.appendChild(compChoiceAnnounce);
 compChoiceDiv.appendChild(compChoice);
 
+const roundResult = document.createElement("p");
+roundResult.classList.add("round-result");
+body.appendChild(roundResult);
+
 const scoreContainer = document.createElement('div');
 scoreContainer.classList.add('human-computer-scores');
 body.appendChild(scoreContainer);
@@ -57,10 +61,6 @@ compDiv.appendChild(compPointsHead);
 
 scoreContainer.appendChild(humanDiv);
 scoreContainer.appendChild(compDiv);
-
-const roundResult = document.createElement("p");
-roundResult.classList.add("round-result");
-body.appendChild(roundResult);
 
 humanDiv.appendChild(humanPointsHead);
 compDiv.appendChild(compPointsHead);
@@ -124,11 +124,11 @@ function showGameOver() {
     const winnerText = document.createElement('h1');
     winnerText.id = 'winner-text';
     if (humanScore > computerScore) {
-        winnerText.textContent = "You beat the computer. Alas! There is HOPE for humanity.";
+        winnerText.innerHTML = "You beat the computer.<br>Alas! There is HOPE for humanity.";
     } else if (humanScore < computerScore) {
-        winnerText.textContent = "You lost to the computer. Mankind is DOOMED.";
+        winnerText.innerHTML = "You lost to the computer.<br>Mankind is DOOMED.";
     } else {
-        winnerText.textContent = "It's a Tie. Show the world you can defeat our digital nemesis.";
+        winnerText.innerHTML = "It's a Tie.<br>Show the world you can defeat our digital nemesis.";
     }
     
     const playAgainButton = document.createElement('button');
