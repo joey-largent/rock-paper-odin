@@ -1,4 +1,9 @@
-//Note: would like to have a button that translates all game UI to Turkish
+//emphasize scores over computer output
+//decrease ROUND in hierarchy
+//simplify color scheme
+
+//IDEALS:
+//would like to have a button that translates all game UI to Turkish
 //Would also like to have pop sound effects when you push the buttons
 
 // HTML ELEMENTS
