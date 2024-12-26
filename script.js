@@ -3,8 +3,8 @@
 //simplify color scheme
 
 //IDEALS:
-//would like to have a button that translates all game UI to Turkish
-//Would also like to have pop sound effects when you push the buttons
+//button that translates all game UI to Turkish/back to english
+//pop sound effects when you push the buttons
 
 // HTML ELEMENTS
 const btnDiv = document.querySelector(".btnDiv");
