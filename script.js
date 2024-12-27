@@ -17,6 +17,26 @@ roundHead.classList.add("round-head");
 roundAnnounce.textContent = "";
 body.prepend(roundHead);
 
+const humanDiv = document.createElement("div");
+const humanPointsHead = document.createElement("h1");
+humanPointsHead.textContent = "HUMAN: 0";
+humanPointsHead.classList.add("hum-head");
+
+const compDiv = document.createElement("div");
+const compPointsHead = document.createElement("h1");
+compPointsHead.textContent = "COMPUTER: 0";
+compPointsHead.classList.add("comp-head");
+
+const scoreContainer = document.createElement('div');
+scoreContainer.classList.add('human-computer-scores');
+body.appendChild(scoreContainer);
+
+humanDiv.appendChild(humanPointsHead);
+compDiv.appendChild(compPointsHead);
+
+scoreContainer.appendChild(humanDiv);
+scoreContainer.appendChild(compDiv);
+
 const rock = document.createElement("button");
 rock.textContent = "ROCK";
 rock.classList.add("rock-btn");
@@ -35,10 +55,8 @@ btnDiv.appendChild(scissors);
 const compChoiceDiv = document.createElement("div");
 const compChoiceAnnounce = document.createElement("h1")
 const compChoice = document.createElement("p");
-compChoiceAnnounce.textContent = "COMPUTER:";
 compChoiceAnnounce.classList.add("comp-choice-announce");
 compChoice.classList.add("comp-choice");
-compChoice.textContent = "Waiting...";
 body.appendChild(compChoiceDiv);
 compChoiceDiv.appendChild(compChoiceAnnounce);
 compChoiceDiv.appendChild(compChoice);
@@ -46,29 +64,6 @@ compChoiceDiv.appendChild(compChoice);
 const roundResult = document.createElement("p");
 roundResult.classList.add("round-result");
 body.appendChild(roundResult);
-
-const scoreContainer = document.createElement('div');
-scoreContainer.classList.add('human-computer-scores');
-body.appendChild(scoreContainer);
-
-const humanDiv = document.createElement("div");
-const humanPointsHead = document.createElement("h1");
-humanPointsHead.textContent = "HUMAN: 0";
-humanPointsHead.classList.add("hum-head");
-
-const compDiv = document.createElement("div");
-const compPointsHead = document.createElement("h1");
-compPointsHead.textContent = "COMPUTER: 0";
-compPointsHead.classList.add("comp-head");
-
-humanDiv.appendChild(humanPointsHead);
-compDiv.appendChild(compPointsHead);
-
-scoreContainer.appendChild(humanDiv);
-scoreContainer.appendChild(compDiv);
-
-humanDiv.appendChild(humanPointsHead);
-compDiv.appendChild(compPointsHead);
 
 //GAME UI
 let round = 1;
